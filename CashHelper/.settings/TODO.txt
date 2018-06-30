@@ -1,4 +1,0 @@
-• Make it work
-• DB backend (JDBC?)
-• Make UI work better (JTable maybe?)
-• Implement separate frame for budget calculation
