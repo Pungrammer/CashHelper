@@ -12,7 +12,7 @@ public class TestAccount {
 
 	private static final int randomUpperLimit = 9999;
 
-	private static final List<Account> testAccounts = new ArrayList<Account>();
+	private static final List<Account> testAccounts = new ArrayList<>();
 
 	private TestAccount() {
 
@@ -32,7 +32,7 @@ public class TestAccount {
 		final String creationDate = TimeHandler.nowAsString();
 		final String lastEdit = TimeHandler.nowAsString();
 
-		return new Account(name, value, creationDate, lastEdit);
+		return new Account(null, name, value, creationDate, lastEdit);
 	}
 
 }
