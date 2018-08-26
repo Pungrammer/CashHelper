@@ -30,9 +30,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import at.fikar.raphael.cashhelper.dto.Account;
-import at.fikar.raphael.cashhelper.dto.Log;
-import at.fikar.raphael.cashhelper.dto.LogStore;
+import at.fikar.raphael.cashhelper.dal.dto.Account;
+import at.fikar.raphael.cashhelper.logging.Log;
+import at.fikar.raphael.cashhelper.logging.LogStore;
 import at.fikar.raphael.cashhelper.file.FileStore;
 import at.fikar.raphael.cashhelper.logging.LogTypes;
 import at.fikar.raphael.cashhelper.logging.Logger;

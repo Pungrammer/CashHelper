@@ -17,8 +17,6 @@ import static at.fikar.raphael.cashhelper.gui.Constants.SUBMIT_BUTTON_X;
 import static at.fikar.raphael.cashhelper.gui.Constants.SUBMIT_BUTTON_Y;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -31,9 +29,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import at.fikar.raphael.cashhelper.dto.Account;
-import at.fikar.raphael.cashhelper.dto.AccountStore;
-import at.fikar.raphael.cashhelper.dto.LogStore;
+import at.fikar.raphael.cashhelper.dal.dto.Account;
+import at.fikar.raphael.cashhelper.dal.stores.AccountStore;
+import at.fikar.raphael.cashhelper.logging.LogStore;
 import at.fikar.raphael.cashhelper.file.FileLoader;
 import at.fikar.raphael.cashhelper.file.FileSaver;
 import at.fikar.raphael.cashhelper.logging.LogTypes;
@@ -51,20 +49,6 @@ public class MainGUI extends JFrame {
 	private LogStore logStore;
 
 	private final File initFile = new File("init.xml");
-
-	public static void main(final String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					final MainGUI frame = new MainGUI();
-					frame.setVisible(true);
-				} catch (final Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public MainGUI() {
 		setTitle("Cashhelper");
@@ -95,9 +79,9 @@ public class MainGUI extends JFrame {
 	private void buildGUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Logger.log(LogTypes.DEBUG, "Total No of Accounts: " + accountStore.getAllAccounts().size());
-		final int windowHight = accountStore.getAllAccounts().size() * 50 + 25;
-		Logger.log(LogTypes.DEBUG, "Window hight: " + windowHight);
-		setBounds(100, 100, 1500, windowHight);
+		final int windowHeight = accountStore.getAllAccounts().size() * 50 + 25;
+		Logger.log(LogTypes.DEBUG, "Window height: " + windowHeight);
+		setBounds(100, 100, 1500, windowHeight);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -115,10 +99,10 @@ public class MainGUI extends JFrame {
 		for (final Account currentAccount : allAccounts) {
 			Logger.log(LogTypes.DEBUG, "Account: " + currentAccount.getName());
 			Logger.log(LogTypes.DEBUG, "YOffset " + yOffset);
-			final JLabel newLable = new JLabel(currentAccount.getName());
-			newLable.setBounds(ACCOUNT_NAME_COLUMN_X, ACCOUNT_NAME_COLUMN_Y + yOffset, ACCOUNT_LABLE_WIDTH,
+			final JLabel newLabel = new JLabel(currentAccount.getName());
+			newLabel.setBounds(ACCOUNT_NAME_COLUMN_X, ACCOUNT_NAME_COLUMN_Y + yOffset, ACCOUNT_LABLE_WIDTH,
 					ACCOUNT_LABLE_HIGHT);
-			contentPane.add(newLable);
+			contentPane.add(newLabel);
 			yOffset = yOffset + Constants.ACCOUNT_LABLE_X_SEPERATOR;
 
 		}
@@ -129,10 +113,10 @@ public class MainGUI extends JFrame {
 		final List<Account> allAccounts = accountStore.getAllAccounts();
 		int yOffset = 0;
 		for (final Account currentAccount : allAccounts) {
-			final JLabel newLable = new JLabel("" + currentAccount.getValue());
-			newLable.setBounds(ACCOUNT_VALUE_COLUMN_X, ACCOUNT_NAME_COLUMN_Y + yOffset, ACCOUNT_LABLE_WIDTH,
+			final JLabel newLabel = new JLabel("" + currentAccount.getValue());
+			newLabel.setBounds(ACCOUNT_VALUE_COLUMN_X, ACCOUNT_NAME_COLUMN_Y + yOffset, ACCOUNT_LABLE_WIDTH,
 					ACCOUNT_LABLE_HIGHT);
-			contentPane.add(newLable);
+			contentPane.add(newLabel);
 			yOffset = yOffset + Constants.ACCOUNT_LABLE_X_SEPERATOR;
 
 		}
@@ -155,12 +139,7 @@ public class MainGUI extends JFrame {
 	private void buildSubmitButton() {
 		final JButton newButton = new JButton("Submit");
 		newButton.setBounds(SUBMIT_BUTTON_X, SUBMIT_BUTTON_Y, SUBMIT_BUTTON_WIDTH, SUBMIT_BUTTON_HIGHT);
-		newButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(final ActionEvent arg0) {
-				updateValue();
-			}
-		});
+		newButton.addActionListener(actionEvent -> updateValue());
 		contentPane.add(newButton);
 		contentPane.repaint();
 	}
@@ -175,7 +154,7 @@ public class MainGUI extends JFrame {
 	private void updateValue() {
 		Logger.log(LogTypes.DEBUG, "updateValues() called");
 		List<Double> uiValues = getUIValues();
-
+		//todo: implementation
 	}
 
 	private List<Double> getUIValues() {

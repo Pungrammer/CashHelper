@@ -1,10 +1,10 @@
-package at.fikar.raphael.cashhelper.dto;
+package at.fikar.raphael.cashhelper.dal;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class LogTest {
+public class LogStoreTest {
 
 	@Test
 	public void test() {

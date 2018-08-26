@@ -10,22 +10,22 @@ import at.fikar.raphael.cashhelper.logging.Logger;
 public class TimeHandler {
 
 	private static final String DATE_FORMAT = "yyyy.MM.dd, HH:mm:ss";
-	private static final SimpleDateFormat simpleFormat = setupDateFormat();
+	private static final SimpleDateFormat SIMPLE_FORMAT = setupDateFormat();
 
 	private static final String DEFAULT_DATE = "2016.01.01, 08:21:33";
 
 	public long timeFormatToMilis(final String input) throws ParseException {
-		final Date date = simpleFormat.parse(input);
+		final Date date = SIMPLE_FORMAT.parse(input);
 		return date.getTime();
 	}
 
 	public static Date timeFormatToDate(final String input) throws ParseException {
 		final String sanitizedInput = sanitize(input);
-		return simpleFormat.parse(sanitizedInput);
+		return SIMPLE_FORMAT.parse(sanitizedInput);
 	}
 
 	public static String millisToDateFormat(final long millis) {
-		return simpleFormat.format(new Date(millis));
+		return SIMPLE_FORMAT.format(new Date(millis));
 	}
 
 	public static long getCurrentMillis() {

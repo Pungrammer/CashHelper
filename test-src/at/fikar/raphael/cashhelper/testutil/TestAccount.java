@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import at.fikar.raphael.cashhelper.dto.Account;
+import at.fikar.raphael.cashhelper.dal.dto.Account;
 import at.fikar.raphael.cashhelper.util.TimeHandler;
 
 public class TestAccount {

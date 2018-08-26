@@ -11,7 +11,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import at.fikar.raphael.cashhelper.dto.Account;
+import at.fikar.raphael.cashhelper.dal.dto.Account;
 import at.fikar.raphael.cashhelper.testutil.TestAccount;
 
 public class FileLoaderTest {

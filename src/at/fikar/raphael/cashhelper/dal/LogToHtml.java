@@ -1,4 +1,6 @@
-package at.fikar.raphael.cashhelper.dto;
+package at.fikar.raphael.cashhelper.dal;
+
+import at.fikar.raphael.cashhelper.logging.Log;
 
 import java.util.List;
 

@@ -10,14 +10,17 @@ import java.text.ParseException;
 import java.util.Collection;
 import java.util.List;
 
-import at.fikar.raphael.cashhelper.dto.Account;
-import at.fikar.raphael.cashhelper.dto.AccountStore;
-import at.fikar.raphael.cashhelper.dto.Log;
-import at.fikar.raphael.cashhelper.dto.LogStore;
+import at.fikar.raphael.cashhelper.dal.dto.Account;
+import at.fikar.raphael.cashhelper.dal.stores.AccountStore;
+import at.fikar.raphael.cashhelper.logging.Log;
+import at.fikar.raphael.cashhelper.logging.LogStore;
 import at.fikar.raphael.cashhelper.logging.LogTypes;
 import at.fikar.raphael.cashhelper.logging.Logger;
 import at.fikar.raphael.cashhelper.util.XMLParser;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class FileLoader {
 
 	private final AccountStore accountStore;
@@ -25,16 +28,11 @@ public class FileLoader {
 	private final LogStore logStore;
 	private BufferedReader inputReader;
 
-	private static final FileLoader fileLoader = new FileLoader();
-
-	private FileLoader() {
-		accountStore = AccountStore.getInstance();
-		logStore = LogStore.getInstance();
-		fileStore = FileStore.getInstance();
-	}
-
-	public static FileLoader getInstance() {
-		return fileLoader;
+	@Inject
+	private FileLoader(final AccountStore accountStore, final LogStore logStore, final FileStore fileStore) {
+		this.accountStore = accountStore;
+		this.logStore = logStore;
+		this.fileStore = fileStore;
 	}
 
 	public void loadInitFile() throws IOException {

@@ -1,4 +1,4 @@
-package at.fikar.raphael.cashhelper.dto;
+package at.fikar.raphael.cashhelper.logging;
 
 public class Log {
 

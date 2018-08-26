@@ -1,10 +1,10 @@
-package at.fikar.raphael.cashhelper.dto;
+package at.fikar.raphael.cashhelper.dal.stores;
 
+import at.fikar.raphael.cashhelper.dal.dto.Account;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 public class UIStore {
 
@@ -16,10 +16,10 @@ public class UIStore {
 	private List<JTextField> inputFieldList;
 
 	private UIStore() {
-		accountList = new ArrayList<Account>();
-		nameLabelList = new ArrayList<JLabel>();
-		valueLabelList = new ArrayList<JLabel>();
-		inputFieldList = new ArrayList<JTextField>();
+		accountList = new ArrayList<>();
+		nameLabelList = new ArrayList<>();
+		valueLabelList = new ArrayList<>();
+		inputFieldList = new ArrayList<>();
 	}
 
 	public static UIStore getInstance() {

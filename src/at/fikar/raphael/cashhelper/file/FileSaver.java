@@ -6,9 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import at.fikar.raphael.cashhelper.dto.Account;
-import at.fikar.raphael.cashhelper.dto.AccountStore;
-import at.fikar.raphael.cashhelper.dto.LogStore;
+import at.fikar.raphael.cashhelper.dal.dto.Account;
+import at.fikar.raphael.cashhelper.dal.stores.AccountStore;
+import at.fikar.raphael.cashhelper.logging.LogStore;
 import at.fikar.raphael.cashhelper.util.XMLParser;
 
 public class FileSaver {

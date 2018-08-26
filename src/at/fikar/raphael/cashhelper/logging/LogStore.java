@@ -1,4 +1,4 @@
-package at.fikar.raphael.cashhelper.dto;
+package at.fikar.raphael.cashhelper.logging;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,12 +14,12 @@ public class LogStore {
 	private static long lastId;
 
 	private LogStore() {
-		storedLogs = new HashMap<Long, Log>();
-		newLogs = new HashMap<Long, Log>();
+		storedLogs = new HashMap<>();
+		newLogs = new HashMap<>();
 	}
 
 	public void putLoadedLogs(final List<Log> savedLogs) {
-		final Map<Long, Log> preparedLogs = new HashMap<Long, Log>();
+		final Map<Long, Log> preparedLogs = new HashMap<>();
 		for (final Log currentLog : savedLogs) {
 			preparedLogs.put(currentLog.getId(), currentLog);
 		}

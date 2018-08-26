@@ -17,7 +17,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import at.fikar.raphael.cashhelper.dto.Account;
+import at.fikar.raphael.cashhelper.dal.dto.Account;
 
 public class XMLParserTest {
 

@@ -2,7 +2,7 @@ package at.fikar.raphael.cashhelper.gui.elements;
 
 import javax.swing.JLabel;
 
-import at.fikar.raphael.cashhelper.dto.Account;
+import at.fikar.raphael.cashhelper.dal.dto.Account;
 
 public class ValueLabel extends JLabel {
 
