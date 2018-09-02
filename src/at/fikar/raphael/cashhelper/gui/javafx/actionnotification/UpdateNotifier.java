@@ -6,22 +6,28 @@ import at.fikar.raphael.cashhelper.logging.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
 public class UpdateNotifier implements Runnable {
 
     private final BlockingQueue<UpdateNotificationType> updateNotificationQueue;
-    private final Map<UpdateNotificationType, List<Callable<Void>>> notificationTargetMap;
+    private final Map<UpdateNotificationType, List<IUpdateable>> notificationTargetMap;
 
     @Inject
     public UpdateNotifier(final QueueProvider queueProvider) {
         this.updateNotificationQueue = queueProvider.get();
         notificationTargetMap = new ConcurrentHashMap<>();
+
+        //Populate map with default lists
+        Arrays.stream(UpdateNotificationType.values())
+                .forEach(updateNotificationType -> notificationTargetMap.put(updateNotificationType,
+                        new ArrayList<>()));
     }
 
     @Override
@@ -29,10 +35,10 @@ public class UpdateNotifier implements Runnable {
         while (!Thread.currentThread().isInterrupted() && Thread.currentThread().isAlive()) {
             try {
                 UpdateNotificationType notificationType = updateNotificationQueue.take();
-                List<Callable<Void>> callables = notificationTargetMap.get(notificationType);
-                callables.forEach(callable -> {
+                List<IUpdateable> updateables = notificationTargetMap.get(notificationType);
+                updateables.forEach(updateable -> {
                     try {
-                        callable.call();
+                        updateable.updateContent();
                     } catch (Exception e) {
                         Logger.log(LogTypes.ERROR, "Unable to update for " + notificationType.name());
                     }
@@ -43,11 +49,10 @@ public class UpdateNotifier implements Runnable {
         }
     }
 
-    public void subscribeListener(final UpdateNotificationType type, final Callable<Void> callbackMethod) {
-        List<Callable<Void>> callables = notificationTargetMap.get(type);
-        callables.add(callbackMethod);
-        notificationTargetMap.put(type, callables);
-
+    public void subscribeListener(final IUpdateable updateable) {
+        List<IUpdateable> updateables = notificationTargetMap.get(updateable.getUpdateType());
+        updateables.add(updateable);
+        notificationTargetMap.put(updateable.getUpdateType(), updateables);
     }
 
     public void notifyAboutUpdate(final UpdateNotificationType type) {

@@ -6,6 +6,7 @@ import at.fikar.raphael.cashhelper.gui.javafx.scenes.OverViewScene;
 import at.fikar.raphael.cashhelper.injection.DALModule;
 import at.fikar.raphael.cashhelper.injection.FileModule;
 import at.fikar.raphael.cashhelper.injection.MiscModule;
+import at.fikar.raphael.cashhelper.injection.TableModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import javafx.application.Application;
@@ -35,7 +36,8 @@ public class Gui extends Application {
         return Guice.createInjector(
                 new MiscModule(),
                 new FileModule(),
-                new DALModule()
+                new DALModule(),
+                new TableModule()
         );
     }
 
